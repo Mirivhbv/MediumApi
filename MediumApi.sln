@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediumApi", "MediumApi\Medi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediumApi.Domain", "MediumApi.Domain\MediumApi.Domain.csproj", "{AB65C395-82D5-45F5-8CDC-F55D1B8C90D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediumApi.Data", "MediumApi.Data\MediumApi.Data.csproj", "{30AB5618-B572-457A-89E4-D94C61D65164}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{AB65C395-82D5-45F5-8CDC-F55D1B8C90D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB65C395-82D5-45F5-8CDC-F55D1B8C90D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB65C395-82D5-45F5-8CDC-F55D1B8C90D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30AB5618-B572-457A-89E4-D94C61D65164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30AB5618-B572-457A-89E4-D94C61D65164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30AB5618-B572-457A-89E4-D94C61D65164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30AB5618-B572-457A-89E4-D94C61D65164}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{43A88380-9EBF-4D13-8167-3F7BD89C429B} = {2D0BC6DE-A9A2-4792-94A3-4DA633C79BDC}
 		{AB65C395-82D5-45F5-8CDC-F55D1B8C90D0} = {2D0BC6DE-A9A2-4792-94A3-4DA633C79BDC}
+		{30AB5618-B572-457A-89E4-D94C61D65164} = {2D0BC6DE-A9A2-4792-94A3-4DA633C79BDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5857D8DF-7232-4756-804B-F3D4D0E4297D}
