@@ -58,7 +58,7 @@ namespace MediumApi.Data.Repository
             }
             catch (Exception e)
             {
-                throw new Exception($"{nameof(entity)} could not be saved: {e.Message}");
+                throw new Exception($"{nameof(entity)} could not be updated {e.Message}");
             }
         }
     }
