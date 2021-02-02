@@ -8,6 +8,10 @@ namespace MediumApi.Data.Database
     {
         #region Ctors
 
+        public MediumContext()
+        {
+        }
+
         public MediumContext(DbContextOptions<MediumContext> options) : base(options)
         {
             // TODO: seed db
