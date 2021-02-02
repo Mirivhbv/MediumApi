@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MediumApi.Data.Database
 {
-    public sealed class MediumContext : DbContext
+    public class MediumContext : DbContext
     {
         #region Ctors
 
