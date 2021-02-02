@@ -36,7 +36,7 @@ namespace MediumApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<MediumContext>(opt => opt.UseInMemoryDatabase("mediumdb"));
+            services.AddDbContext<MediumContext>(opt => opt.UseInMemoryDatabase("mediumdb"));
             
             services.AddAutoMapper(typeof(Startup));
 
