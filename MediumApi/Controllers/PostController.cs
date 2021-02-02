@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
 using MediumApi.Data.Repository;
 using MediumApi.Domain.Entities;
+using MediumApi.Models;
+using MediumApi.Service.Command;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediumApi.Controllers
@@ -14,10 +18,14 @@ namespace MediumApi.Controllers
     public class PostController : ControllerBase
     {
         private readonly IRepository<Post> _postRepository;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public PostController(IRepository<Post> postRepository)
+        public PostController(IRepository<Post> postRepository, IMediator mediator, IMapper mapper)
         {
             _postRepository = postRepository;
+            _mediator = mediator;
+            _mapper = mapper;
         }
 
 
@@ -30,7 +38,7 @@ namespace MediumApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Post>> Posts()
         {
-           try
+            try
             {
                 return _postRepository.GetAll().ToList();
             }
@@ -40,7 +48,22 @@ namespace MediumApi.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Action to create a new post.
+        /// </summary>
+        /// <returns>Returns the created customer</returns>
+        [HttpPost]
+        public async Task<ActionResult<Post>> Post(CreatePostModel model) // todo: validator
+        {
+            try
+            {
+                return await _mediator.Send(new CreatePostCommand {Post = _mapper.Map<Post>(model)});
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         #endregion
     }

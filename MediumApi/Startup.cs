@@ -9,9 +9,14 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
 using MediumApi.Data.Database;
 using MediumApi.Data.Repository;
+using MediumApi.Domain.Entities;
+using MediumApi.Service.Command;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediumApi
@@ -28,10 +33,16 @@ namespace MediumApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<MediumContext>(opt => opt.UseInMemoryDatabase("mediumdb"));
+            
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
 
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddTransient<IRequestHandler<CreatePostCommand, Post>, CreatePostCommandHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
