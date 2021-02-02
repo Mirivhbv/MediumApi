@@ -53,7 +53,7 @@ namespace MediumApi.Controllers
         /// </summary>
         /// <returns>Returns the created customer</returns>
         [HttpPost]
-        public async Task<ActionResult<Post>> Post(CreatePostModel model) // todo: validator
+        public async Task<ActionResult<Post>> Post(CreatePostModel model)
         {
             try
             {
