@@ -8,6 +8,7 @@ using MediumApi.Data.Repository;
 using MediumApi.Domain.Entities;
 using MediumApi.Models;
 using MediumApi.Service.Command;
+using MediumApi.Service.Query;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediumApi.Controllers
@@ -33,18 +34,18 @@ namespace MediumApi.Controllers
         /// Action to retrieve all posts.
         /// </summary>
         /// <returns>Returns a list of posts or an empty list, if there is no post.</returns>
-        //[HttpGet]
-        //public ActionResult<IEnumerable<Post>> Posts()
-        //{
-        //    try
-        //    {
-        //        return _postRepository.GetAll().ToList();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
+        [HttpGet]
+        public async Task<ActionResult<List<Post>>> Posts()
+        {
+            try
+            {
+                return await _mediator.Send(new GetPostQuery());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         /// <summary>
         /// Action to create a new post.
@@ -55,7 +56,7 @@ namespace MediumApi.Controllers
         {
             try
             {
-                return await _mediator.Send(new CreatePostCommand {Post = _mapper.Map<Post>(model)});
+                return await _mediator.Send(new CreatePostCommand { Post = _mapper.Map<Post>(model) });
             }
             catch (Exception e)
             {

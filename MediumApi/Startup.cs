@@ -21,6 +21,7 @@ using MediumApi.Domain.Entities;
 using MediumApi.Infrastructure.Validators;
 using MediumApi.Models;
 using MediumApi.Service.Command;
+using MediumApi.Service.Query;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediumApi
@@ -45,7 +46,9 @@ namespace MediumApi
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
+            services.AddScoped<IPostRepository, PostRepository>();
+            
+            services.AddTransient<IRequestHandler<GetPostQuery, List<Post>>, GetPostQueryHandler>();
             services.AddTransient<IRequestHandler<CreatePostCommand, Post>, CreatePostCommandHandler>();
 
             services.AddTransient<IValidator<CreatePostModel>, CreatePostModelValidator>();

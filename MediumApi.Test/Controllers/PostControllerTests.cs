@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using AutoMapper;
 using FakeItEasy;
 using FluentAssertions;
@@ -10,6 +12,7 @@ using MediumApi.Controllers;
 using MediumApi.Domain.Entities;
 using MediumApi.Models;
 using MediumApi.Service.Command;
+using MediumApi.Service.Query;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
@@ -43,6 +46,7 @@ namespace MediumApi.Test.Controllers
 
             A.CallTo(() => mapper.Map<Post>(A<Post>._)).Returns(post);
             A.CallTo(() => _mediator.Send(A<CreatePostCommand>._, default)).Returns(post);
+            A.CallTo(() => _mediator.Send(A<GetPostQuery>._, default)).Returns(new List<Post> {new Post(), new Post()});
         }
 
         [Theory]
@@ -66,6 +70,28 @@ namespace MediumApi.Test.Controllers
             (result.Result as StatusCodeResult)?.StatusCode.Should().Be((int) HttpStatusCode.OK);
             result.Value.Should().BeOfType<Post>();
             result.Value.Id.Should().Be(_id);
+        }
+
+        [Fact]
+        public async void Posts__should_return_list_of_posts()
+        {
+            var result = await _testee.Posts();
+
+            (result.Result as StatusCodeResult)?.StatusCode.Should().Be((int) HttpStatusCode.OK);
+            result.Value.Should().BeOfType<List<Post>>();
+            result.Value.Count.Should().Be(2);
+        }
+
+        [Fact]
+        public async void Posts__when_no_post_were_found__should_return_empty_list()
+        {
+            A.CallTo(() => _mediator.Send(A<GetPostQuery>._, A<CancellationToken>._)).Returns(new List<Post>());
+
+            var result = await _testee.Posts();
+
+            (result.Result as StatusCodeResult)?.StatusCode.Should().Be((int) HttpStatusCode.OK);
+            result.Value.Should().BeOfType<List<Post>>();
+            result.Value.Count.Should().Be(0);
         }
     }
 }

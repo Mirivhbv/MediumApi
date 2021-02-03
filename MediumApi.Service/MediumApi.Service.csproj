@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Query\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MediumApi.Data\MediumApi.Data.csproj" />
     <ProjectReference Include="..\MediumApi.Domain\MediumApi.Domain.csproj" />
   </ItemGroup>
