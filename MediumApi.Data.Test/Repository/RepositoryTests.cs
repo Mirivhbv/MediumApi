@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FakeItEasy;
 using FluentAssertions;
@@ -6,6 +7,8 @@ using MediumApi.Data.Database;
 using MediumApi.Data.Repository;
 using MediumApi.Data.Test.Infrastructure;
 using MediumApi.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Xunit;
 
 namespace MediumApi.Data.Test.Repository
@@ -51,6 +54,12 @@ namespace MediumApi.Data.Test.Repository
 
             _testeeFake.Invoking(x => x.GetAll()).Should().Throw<Exception>()
                 .WithMessage("Couldn't retrieve entities: Exception of type 'System.Exception' was thrown.");
+        }
+
+        [Fact]
+        public void GetAll_when_called__should_return_db_set()
+        {
+            _testee.GetAll().Should().BeOfType<InternalDbSet<Post>>();
         }
 
         [Fact]
