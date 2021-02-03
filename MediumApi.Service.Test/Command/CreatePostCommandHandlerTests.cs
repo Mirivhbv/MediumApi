@@ -10,11 +10,11 @@ namespace MediumApi.Service.Test.Command
     public class CreatePostCommandHandlerTests
     {
         private readonly CreatePostCommandHandler _testee;
-        private readonly IRepository<Post> _postRepository;
+        private readonly IPostRepository _postRepository;
 
         public CreatePostCommandHandlerTests()
         {
-            _postRepository = A.Fake<IRepository<Post>>();
+            _postRepository = A.Fake<IPostRepository>();
             _testee = new CreatePostCommandHandler(_postRepository);
         }
 
