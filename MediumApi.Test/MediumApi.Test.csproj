@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Validator\" />
   </ItemGroup>
 
   <ItemGroup>

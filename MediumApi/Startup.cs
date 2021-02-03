@@ -37,7 +37,7 @@ namespace MediumApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MediumContext>(opt => opt.UseInMemoryDatabase("mediumdb"));
-            
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers().AddFluentValidation();
