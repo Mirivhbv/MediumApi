@@ -17,13 +17,11 @@ namespace MediumApi.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly IRepository<Post> _postRepository;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public PostController(IRepository<Post> postRepository, IMediator mediator, IMapper mapper)
+        public PostController(IMediator mediator, IMapper mapper)
         {
-            _postRepository = postRepository;
             _mediator = mediator;
             _mapper = mapper;
         }
@@ -35,18 +33,18 @@ namespace MediumApi.Controllers
         /// Action to retrieve all posts.
         /// </summary>
         /// <returns>Returns a list of posts or an empty list, if there is no post.</returns>
-        [HttpGet]
-        public ActionResult<IEnumerable<Post>> Posts()
-        {
-            try
-            {
-                return _postRepository.GetAll().ToList();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<Post>> Posts()
+        //{
+        //    try
+        //    {
+        //        return _postRepository.GetAll().ToList();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(e.Message);
+        //    }
+        //}
 
         /// <summary>
         /// Action to create a new post.
