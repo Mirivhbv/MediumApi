@@ -37,7 +37,11 @@ namespace MediumApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MediumContext>(opt => opt.UseInMemoryDatabase("mediumdb"));
+            //services.AddDbContext<MediumContext>(opt => opt.UseInMemoryDatabase("mediumdb"));
+            var thisAssemblyName = typeof(Startup).Assembly.GetName().Name;
+            services.AddDbContext<MediumContext>(opt => 
+                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"), 
+                    builder => builder.MigrationsAssembly(thisAssemblyName)));
 
             services.AddAutoMapper(typeof(Startup));
 

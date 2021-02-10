@@ -14,7 +14,22 @@ namespace MediumApi.Data.Database
 
         public MediumContext(DbContextOptions<MediumContext> options) : base(options)
         {
-            // TODO: seed db
+        }
+
+        #endregion
+
+        #region Properties
+
+        public DbSet<Post> Posts { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
             var posts = new[]
             {
                 new Post
@@ -29,15 +44,8 @@ namespace MediumApi.Data.Database
                 },
             };
 
-            Posts.AddRange(posts);
-            SaveChanges();
+            modelBuilder.Entity<Post>().HasData(posts);
         }
-
-        #endregion
-
-        #region Properties
-
-        public DbSet<Post> Posts { get; set; }
 
         #endregion
     }
